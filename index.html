@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Al Ain Coop_ Al Bahay Mall_ Abu Dhabi — Façade Lighting Design Presentation</title>
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --card: #121318;
+      --ink: #eef1f5;
+      --muted: #9aa3b2;
+      --brand: #6fb1ff;
+      --brand-2: #8b5cf6;
+      --accent: #34d399;
+      --ring: rgba(111,177,255,.5);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(111,177,255,.15), transparent 60%),
+                  radial-gradient(1200px 800px at 80% -10%, rgba(139,92,246,.12), transparent 60%),
+                  var(--bg);
+      color:var(--ink);
+    }
+    .wrap{max-width:1440px; margin:0 auto; padding:24px}
+    
+    /* Header */
+    header{position:sticky; top:0; z-index:30; backdrop-filter:saturate(140%) blur(6px);}
+    .header-inner{display:flex; gap:16px; align-items:center; justify-content:space-between; padding:14px 24px; border-radius:20px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .title{line-height:1.15;}
+    .title h1{margin:0; font-size:clamp(18px,3vw,22px); font-weight:800; letter-spacing:.2px}
+    .title p{margin:4px 0 0; color:var(--muted); font-size:12px}
+
+    /* Toolbar */
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{--b:rgba(255,255,255,.14); --bgc:rgba(255,255,255,.06); --tx:var(--ink);
+      padding:10px 14px; border-radius:999px; border:1px solid var(--b); background:var(--bgc); color:var(--tx); font-weight:600; font-size:13px; letter-spacing:.2px; cursor:pointer; transition:.2s ease;}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,.22)}
+    .btn:focus{outline:3px solid var(--ring); outline-offset:2px}
+    .btn.primary{--b:transparent; --bgc: linear-gradient(135deg, var(--brand), var(--brand-2));}
+    .btn.ghost{--b:rgba(255,255,255,.12); --bgc:transparent}
+    .btn.active{box-shadow:0 0 0 2px rgba(255,255,255,.18) inset, 0 8px 20px rgba(0,0,0,.25)}
+
+    .segment{display:flex; gap:6px; padding:3px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08)}
+    .seg{padding:8px 12px; border-radius:999px; color:var(--ink); font-weight:700; font-size:12px; cursor:pointer; transition:.2s ease}
+    .seg[aria-pressed="true"]{background:linear-gradient(135deg, rgba(111,177,255,.25), rgba(139,92,246,.25)); border-color:rgba(255,255,255,.24); box-shadow:0 8px 20px rgba(0,0,0,.25)}
+
+    /* Viewer */
+    .viewer{margin-top:22px; display:grid; gap:16px}
+    .card{border-radius:22px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.35)}
+
+    .stage{position:relative; width:100%; aspect-ratio:16/9; min-height:clamp(420px, 58vh, 780px); background:#0e1014; overflow:hidden}
+    .stage img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+
+    /* Compare slider */
+    .compare{position:relative; width:100%; height:100%}
+    .compare .top{position:absolute; inset:0; width:50%; overflow:hidden; border-right:2px solid rgba(255,255,255,.6); box-shadow:1px 0 0 rgba(0,0,0,.4)}
+    .compare .handle{position:absolute; top:0; left:calc(50% - 12px); width:24px; height:100%; display:flex; align-items:center; justify-content:center; color:#111; background:rgba(255,255,255,.9); box-shadow:0 0 0 2px rgba(0,0,0,.25); border-radius:8px}
+    .compare .hint{position:absolute; bottom:12px; left:50%; transform:translateX(-50%); color:#111; background:rgba(255,255,255,.85); padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700}
+    .compare input[type=range]{position:absolute; inset:0; -webkit-appearance:none; appearance:none; background:transparent; width:100%; height:100%; cursor:ew-resize}
+    .compare input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:24px; height:100%; background:transparent;}
+    .compare input[type=range]::-moz-range-thumb{width:24px; height:100%; background:transparent; border:none}
+
+    /* Gallery */
+    .gallery{position:relative; width:100%; height:100%}
+    .nav-arrow{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.25); background:rgba(0,0,0,.35); color:#fff; display:grid; place-items:center; cursor:pointer}
+    .nav-arrow:hover{background:rgba(0,0,0,.55)}
+    .nav-arrow.left{left:12px}
+    .nav-arrow.right{right:12px}
+
+    .thumbs{display:flex; gap:10px; flex-wrap:wrap; padding:14px; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00))}
+    .thumb{position:relative; width:120px; aspect-ratio:16/9; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.10); cursor:pointer;}
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05)}
+    .thumb.active{box-shadow:0 0 0 2px var(--brand) inset}
+    .thumb .num{position:absolute; top:6px; left:6px; background:rgba(0,0,0,.6); color:#fff; font-size:12px; padding:3px 7px; border-radius:999px; font-weight:700}
+
+    /* Info cards */
+    .grid{display:grid; grid-template-columns: 1fr; gap:16px;}
+    @media(min-width:900px){ .grid{grid-template-columns: 1.6fr .4fr} }
+    .info{padding:18px 20px}
+    h3{margin:0 0 8px; font-size:16px}
+    p{margin:6px 0; color:var(--muted)}
+    .meta{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:12px; font-size:13px}
+    .meta div{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius:12px}
+    .k{display:block; color:var(--muted); font-weight:600; font-size:12px}
+    .v{display:block; font-weight:800}
+
+    .mutetext{color:var(--muted); font-size:12px}
+
+    /* Fittings list */
+    .fittings-block[hidden]{display:none !important}
+    .fittings-title{margin:12px 0 8px; font-size:14px; font-weight:800}
+    .fittings{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px}
+    .fit{position:relative; width:140px; aspect-ratio:1; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.03)}
+    .fit img{width:100%; height:100%; object-fit:contain; display:block; background:#0e1014}
+    .fit figcaption{position:absolute; bottom:6px; left:6px; background:rgba(0,0,0,.55); color:#fff; font-size:12px; padding:2px 6px; border-radius:999px; font-weight:700}
+
+    /* Footer */
+    footer{opacity:.8; text-align:center; font-size:12px; padding:18px 0}
+
+    /* === RESPONSIVE STYLES === */
+    @media(max-width: 900px) {
+      .wrap{padding: 12px;}
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 18px;
+      }
+      .toolbar {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+      .segment {
+        flex-grow: 1;
+        justify-content: center;
+      }
+      .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      .seg {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      .viewer {
+        margin-top: 16px;
+        gap: 12px;
+      }
+      .card {
+        border-radius: 16px;
+      }
+      .stage {
+        min-height: 280px;
+      }
+      .nav-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+      .nav-arrow.left { left: 8px; }
+      .nav-arrow.right { right: 8px; }
+      .thumbs {
+        padding: 10px;
+        justify-content: center;
+      }
+      .thumb {
+        width: 90px;
+        border-radius: 10px;
+      }
+      .info {
+        padding: 16px;
+      }
+      .meta {
+        grid-template-columns: 1fr;
+        font-size: 12px;
+      }
+      .fit {
+        width: calc(50% - 6px); /* Two columns on mobile */
+      }
+      .fittings {
+        justify-content: space-around;
+      }
+    }
+    
+    /* Print */
+    @media print{
+      header, .thumbs, .toolbar .btn.ghost, .seg, .compare .hint, .nav-arrow, .mutetext{display:none !important}
+      body{background:#fff; color:#000}
+      .wrap{padding:0}
+      .header-inner{box-shadow:none; background:#fff; border:none}
+      .card{box-shadow:none; border-color:#ddd}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="header-inner">
+        <div class="title">
+          <h1>Façade Lighting Design Presentation — Options 01–04</h1>
+          <p>Project: <strong>Al Ain Coop_ Al Bahay Mall_ Abu Dhabi</strong></p>
+        </div>
+        <div class="toolbar">
+          <div class="segment" role="group" aria-label="Choose option">
+            <button class="btn ghost seg" data-opt="00" aria-pressed="false" title="Reference / Typical">Ref</button>
+            <button class="btn ghost seg" data-opt="01" aria-pressed="true">Option 01</button>
+            <button class="btn ghost seg" data-opt="02" aria-pressed="false">Option 02</button>
+            <button class="btn ghost seg" data-opt="03" aria-pressed="false">Option 03</button>
+            <button class="btn ghost seg" data-opt="04" aria-pressed="false">Option 04</button>
+          </div>
+          <button class="btn ghost" id="toggleCompare" aria-pressed="false" title="Compare with Typical (Option 00)">Compare</button>
+          <button class="btn ghost" id="fullscreenBtn" title="Enter full screen">Full Screen</button>
+          <button class="btn primary" onclick="window.print()" title="Export / Print">Export PDF</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="viewer">
+      <section class="card grid">
+        <div class="stage" id="stage">
+          <div class="compare" id="compare" hidden>
+            <img id="cmp-bottom" alt="Typical reference (Option 00)" src="Option 00.png" />
+            <div class="top" id="cmp-top">
+              <img id="cmp-top-img" alt="Selected option" src="Option 01.png" />
+            </div>
+            <div class="handle" id="cmp-handle">≡</div>
+            <div class="hint">Drag to compare</div>
+            <input id="cmp-range" type="range" min="0" max="100" value="50" aria-label="Comparison slider" />
+          </div>
+
+          <div class="gallery" id="gallery">
+            <button class="nav-arrow left" id="prev" aria-label="Previous image">‹</button>
+            <img id="main" alt="Presentation image" src="Option 01.png" />
+            <button class="nav-arrow right" id="next" aria-label="Next image">›</button>
+          </div>
+        </div>
+
+        <aside class="card info">
+          <h3 id="sideTitle">Option 01</h3>
+          <p id="sideDesc">Click the buttons above to switch between design options. Use <strong>Compare</strong> to slide between the typical façade (Option 00) and the selected option.
+          </p>
+          <div class="meta">
+            <div><span class="k">Project</span><span class="v">Al Ain Coop — Al Bahay Mall</span></div>
+            <div><span class="k">Location</span><span class="v">Abu Dhabi</span></div>
+            <div><span class="k">Scope</span><span class="v">Façade Lighting Design</span></div>
+            <div><span class="k">Presentation</span><span class="v">Options 01–04</span></div>
+          </div>
+          <p class="mutetext" style="margin-top:10px">Tip: Use keyboard <strong>1–4</strong> to switch options, <strong>←/→</strong> to change page, <strong>C</strong> to compare, <strong>F</strong> for full screen, <strong>P</strong> to print.</p>
+        </aside>
+      </section>
+
+      <section class="card" id="thumbCard">
+        <div class="thumbs" id="thumbs"></div>
+      </section>
+
+      <section class="card info">
+        <h3>Notes & Future Additions</h3>
+        <ul id="notesList"></ul>
+
+        <div id="fittingsBlock" class="fittings-block">
+          <div id="fittingsTitle" class="fittings-title">Fittings used in Option 01</div>
+          <div id="fittings" class="fittings" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>© <span id="yr"></span> Façade Lighting Presentation · Single‑file HTML · Save this next to <em>Option 00.png – Option 04.png</em></footer>
+  </div>
+
+<div id="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,.9); z-index: 100; align-items: center; justify-content: center; cursor: pointer;">
+  <img id="modal-image" style="max-width: 90%; max-height: 90%; object-fit: contain;" alt="Enlarged view" />
+</div>
+
+  <script>
+    // ---------- Data / naming ----------
+    // Base image names must exist in the same folder:
+    // "Option 00.png", "Option 01.png", "Option 02.png", "Option 03.png", "Option 04.png"
+    // For MULTI‑PAGE per option, add files using this pattern (optional):
+    //   Option 01-02.png, Option 01-03.png ... Option 01-12.png (and similarly for 02, 03, 04)
+
+    const options = ["00","01","02","03","04"]; // 00 = Typical / Reference
+    const imagesByOption = {
+      "00": ["Option 00.png"],
+      "01": ["Option 01.png"],
+      "02": ["Option 02.png"],
+      "03": ["Option 03.png"],
+      "04": ["Option 04.png"],
+    };
+
+    // NEW: fittings images per option (same folder)
+    const fittingsByOption = {
+      "00": [],
+      "01": ["Option 01A.png","Option 01B.png","Option 01C.png"],
+      "02": ["Option 02A.png","Option 02B.png","Option 02C.png"],
+      "03": ["Option 03A.png","Option 03B.png","Option 03C.png"],
+      "04": ["Option 04A.png","Option 04B.png","Option 04C.png"],
+    };
+
+// ---- Notes per option ----
+const notesByOption = {
+  "01": [
+    "Fitting types used (Customized Linear Recessed Fixture 15 Cm Width)",
+    "Wattages : to be decided",
+    "Optics - Wide",
+    "CCT  - Warm White Light",
+    "CRI - 80+",
+    "IP  - 65"
+  ],
+  "02": [
+    "Fitting types used ( Up-Down Wall Light/ Neon Flex)",
+    "Wattages : to be decided",
+    "Optics - Medium",
+    "CCT  - Warm White Light",
+    "CRI - 80+",
+    "IP  - 65"
+  ],
+  "03": [
+    "Fitting types used ( inground uplight)",
+    "Wattages : to be decided",
+    "Optics - Narrow",
+    "CCT  - Warm White Light",
+    "CRI - 80+",
+    "IP  - 65"
+  ],
+  "04": [
+    "Fitting types used (inground uplight + Neon Flex)",
+    "Wattages : to be decided",
+    "Optics - Narrow",
+    "CCT  - Warm White Light",
+    "CRI - 80+",
+    "IP  - 65"
+  ]
+};
+
+function updateNotes(){
+  const listEl = document.getElementById('notesList');
+  if(!listEl){ return; }
+  const items = notesByOption[state.currentOpt] || [];
+  listEl.innerHTML = '';
+  items.forEach(txt => {
+    const li = document.createElement('li');
+    li.textContent = txt;
+    listEl.appendChild(li);
+  });
+}
+
+const linkByFittingImage = {
+  
+  "Option 01B.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Inground_IG02_24.pdf",
+  "Option 02A.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_WallLight_WL04_24.pdf",
+  "Option 02B.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Neon_Top_NFTB_24.pdf",
+  "Option 03A.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Inground_IG02_24.pdf",
+  "Option 03B.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Neon_Top_NFTB_24.pdf",
+  "Option 04A.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Inground_IG02_24.pdf",
+  "Option 04B.png": "https://irp.cdn-website.com/2e271d71/files/uploaded/Frater_Neon_Top_NFTB_24.pdf"
+};
+
+
+    // Try to discover extra pages up to -12 for each option
+    const MAX_EXTRA = 12;
+    function probeExtraPages(opt){
+      for(let i=2;i<=MAX_EXTRA;i++){
+        const src = `Option ${opt}-${String(i).padStart(2,'0')}.png`;
+        const img = new Image();
+        img.onload = ()=>{ imagesByOption[opt].push(src); if(opt===state.currentOpt){ buildThumbs(); } };
+        img.onerror = ()=>{};
+        img.src = src;
+      }
+    }
+
+    options.forEach((opt)=> probeExtraPages(opt));
+
+    // ---------- State ----------
+    const state = { currentOpt: "01", pageIndex: 0, compare: false };
+
+    // ---------- Elements ----------
+    const segs = Array.from(document.querySelectorAll('.seg'));
+    const mainImg = document.getElementById('main');
+    const sideTitle = document.getElementById('sideTitle');
+    const thumbs = document.getElementById('thumbs');
+    const gallery = document.getElementById('gallery');
+    const compare = document.getElementById('compare');
+    const cmpRange = document.getElementById('cmp-range');
+    const cmpTop = document.getElementById('cmp-top');
+    const cmpTopImg = document.getElementById('cmp-top-img');
+    const cmpHandle = document.getElementById('cmp-handle');
+    const toggleCompareBtn = document.getElementById('toggleCompare');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const stage = document.getElementById('stage');
+
+    // NEW: fittings DOM
+    const fittingsBlock = document.getElementById('fittingsBlock');
+    const fittingsTitle = document.getElementById('fittingsTitle');
+    const fittingsList = document.getElementById('fittings');
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // ---------- UI helpers ----------
+    function setOption(opt){
+      state.currentOpt = opt; state.pageIndex = 0; updateUI();
+    updateNotes();
+      // Update aria pressed
+      segs.forEach(s=> s.setAttribute('aria-pressed', s.dataset.opt===opt ? 'true' : 'false'));
+    }
+
+    function updateUI(){
+      const list = imagesByOption[state.currentOpt] || [];
+      // Safety
+      if(!list.length){ return; }
+      const src = list[state.pageIndex];
+      mainImg.src = src; mainImg.alt = `Option ${state.currentOpt} — page ${state.pageIndex+1}`;
+      cmpTopImg.src = state.currentOpt === '00' ? 'Option 00.png' : src;
+      sideTitle.textContent = state.currentOpt === '00' ? 'Reference (Typical)' : `Option ${state.currentOpt}`;
+      buildThumbs();
+      updateFittings();
+      updateNotes();
+    }
+
+    function buildThumbs(){
+      const list = imagesByOption[state.currentOpt];
+      thumbs.innerHTML = '';
+      list.forEach((src, i)=>{
+        const b = document.createElement('button');
+        b.className = 'thumb' + (i===state.pageIndex ? ' active' : '');
+        b.title = `Page ${i+1}`;
+        b.onclick = ()=>{ state.pageIndex = i; updateUI(); };
+        const img = document.createElement('img'); img.src = src; img.alt = `Thumbnail ${i+1}`;
+        const n = document.createElement('span'); n.className='num'; n.textContent = i+1;
+        b.appendChild(img); b.appendChild(n);
+        thumbs.appendChild(b);
+      });
+    }
+
+    function setCompare(on){
+      state.compare = !!on;
+      toggleCompareBtn.setAttribute('aria-pressed', state.compare);
+      compare.hidden = !state.compare; gallery.hidden = state.compare;
+    }
+
+    // NEW: update fittings grid based on current option
+    function updateFittings(){
+      const items = fittingsByOption[state.currentOpt] || [];
+      const isRef = state.currentOpt === '00';
+
+      if(isRef || items.length === 0){
+        // Hide section when Ref is selected or no items
+        fittingsBlock.hidden = true;
+        fittingsList.innerHTML = '';
+        fittingsTitle.textContent = '';
+        return;
+      }
+
+      fittingsBlock.hidden = false;
+      fittingsTitle.textContent = `Fittings used in Option ${state.currentOpt}`;
+      fittingsList.innerHTML = '';
+
+      items.forEach((src, idx)=>{
+        const fig = document.createElement('figure');
+        fig.className = 'fit';
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.src = src;
+        img.alt = `Fitting ${String.fromCharCode(65+idx)} for Option ${state.currentOpt}`;
+        img.onerror = ()=>{ fig.style.display='none'; };
+        
+        // Check if the source is the one we want to make clickable
+        if (src === 'Option 01A.png') {
+          fig.style.cursor = 'zoom-in';
+          fig.title = 'Click to enlarge';
+          fig.addEventListener('click', () => {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = src;
+            modal.style.display = 'flex';
+          });
+        }
+        
+        // Open spec sheet PDF in a new tab when this fitting image (e.g., Option 01A.png) is clicked
+        const url = linkByFittingImage[src];
+        if (url && src !== 'Option 01A.png') {
+          fig.style.cursor = 'pointer';
+          fig.title = 'Open spec sheet in new tab';
+          fig.setAttribute('role','link');
+          fig.setAttribute('tabindex','0');
+          const openUrl = () => window.open(url, '_blank', 'noopener,noreferrer');
+          fig.addEventListener('click', openUrl);
+          // Keyboard accessibility
+          fig.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openUrl(); }
+          });
+        }
+        const cap = document.createElement('figcaption');
+        cap.textContent = String.fromCharCode(65+idx);
+        fig.appendChild(img);
+        fig.appendChild(cap);
+        fittingsList.appendChild(fig);
+      });
+    }
+
+    // Initialize
+    setOption('01'); setCompare(false); cmpRange.value = 50; cmpTop.style.width = '50%'; cmpHandle.style.left = 'calc(50% - 12px)';
+
+    // Function to close the modal
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+
+    // Event listener for the modal itself to close it
+    const modal = document.getElementById('modal');
+    modal.addEventListener('click', closeModal);
+
+    // Prevent clicks on the image inside the modal from closing it
+    document.getElementById('modal-image').addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // ---------- Events ----------
+    segs.forEach(seg=>{
+      seg.addEventListener('click', ()=>{ setOption(seg.dataset.opt); });
+    });
+
+    toggleCompareBtn.addEventListener('click', ()=> setCompare(!state.compare));
+
+    // Compare slider move
+    function applyCompare(xPerc){
+      xPerc = Math.max(0, Math.min(100, xPerc));
+      cmpTop.style.width = xPerc + '%';
+      cmpHandle.style.left = `calc(${xPerc}% - 12px)`;
+    }
+
+    cmpRange.addEventListener('input', e=> applyCompare(+e.target.value));
+
+    // Drag handle with mouse
+    let dragging = false;
+    cmpHandle.addEventListener('mousedown', ()=> dragging = true);
+    window.addEventListener('mouseup', ()=> dragging = false);
+    window.addEventListener('mousemove', (e)=>{
+      if(!dragging) return; const rect = stage.getBoundingClientRect(); const x = e.clientX - rect.left; applyCompare((x/rect.width)*100);
+    });
+
+    // Touch support
+    cmpHandle.addEventListener('touchstart', ()=> dragging = true, {passive:true});
+    window.addEventListener('touchend', ()=> dragging = false, {passive:true});
+    window.addEventListener('touchmove', (e)=>{
+      if(!dragging) return; const t = e.touches[0]; const rect = stage.getBoundingClientRect(); const x = t.clientX - rect.left; applyCompare((x/rect.width)*100);
+    }, {passive:true});
+
+    // Gallery nav
+    function next(){ const list = imagesByOption[state.currentOpt]; state.pageIndex = (state.pageIndex + 1) % list.length; updateUI(); }
+    function prev(){ const list = imagesByOption[state.currentOpt]; state.pageIndex = (state.pageIndex - 1 + list.length) % list.length; updateUI(); }
+    nextBtn.addEventListener('click', next); prevBtn.addEventListener('click', prev);
+
+    // Fullscreen
+    document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+      const el = document.documentElement; if(!document.fullscreenElement){ el.requestFullscreen?.(); } else { document.exitFullscreen?.(); }
+    });
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', (e)=>{
+      if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if(e.key>='1' && e.key<='4'){ setOption('0'+e.key); }
+      if(e.key==='0'){ setOption('00'); }
+      if(e.key==='ArrowRight'){ next(); }
+      if(e.key==='ArrowLeft'){ prev(); }
+      if(e.key==='c' || e.key==='C'){ setCompare(!state.compare); }
+      if(e.key==='f' || e.key==='F'){ document.getElementById('fullscreenBtn').click(); }
+      if(e.key==='p' || e.key==='P'){ window.print(); }
+    });
+  </script>
+</body>
+</html>
